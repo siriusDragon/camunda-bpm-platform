@@ -4,9 +4,8 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import org.camunda.bpm.cockpit.CockpitApplication;
-import org.camunda.bpm.cockpit.plugin.CockpitPlugins;
-import org.camunda.bpm.cockpit.plugin.api.Plugin;
+import org.camunda.bpm.cockpit.plugin.PluginRegistry;
+import org.camunda.bpm.cockpit.spi.CockpitPlugin;
 
 /**
  *
@@ -16,8 +15,8 @@ import org.camunda.bpm.cockpit.plugin.api.Plugin;
 public class PluginsResource {
 
   @GET
-  public List<Plugin> getPlugins() {
+  public List<CockpitPlugin> getPlugins() {
 
-    return CockpitPlugins.getPlugins();
+    return new PluginRegistry().getCockpitPlugins();
   }
 }

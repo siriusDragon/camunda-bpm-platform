@@ -18,8 +18,15 @@
 
     <dependency>
       <groupId>org.camunda.bpm.cockpit</groupId>
-      <artifactId>camunda-cockpit-plugin-registry</artifactId>
-      <scope>provided</scope>
+      <artifactId>camunda-cockpit-plugin-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.cockpit</groupId>
+      <artifactId>camunda-cockpit-plugin-core</artifactId>
+      <version>${project.version}</version>
+      <scope>runtime</scope>
     </dependency>
 
     <!-- jee spec -->
@@ -57,6 +64,33 @@
         </exclusion>
       </exclusions>
     </dependency>
+
+    <!-- tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.easytesting</groupId>
+      <artifactId>fest-assert</artifactId>
+      <version>1.4</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.shrinkwrap.resolver</groupId>
+      <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- arquillian tests -->
+    <dependency>
+      <groupId>org.jboss.arquillian.junit</groupId>
+      <artifactId>arquillian-junit-container</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -75,7 +109,18 @@
     <profile>
       <id>tomcat</id>
 
+      <properties>
+        <tomcat6.runtime.location>E:/Camunda/repository/camunda-bpm-platform/distro/tomcat/distro/target/camunda-bpm-tomcat-7.0.0-SNAPSHOT/server/apache-tomcat-7.0.33</tomcat6.runtime.location>
+        <tomcat6.connector.http.port>8080</tomcat6.connector.http.port>
+      </properties>
+
       <dependencies>
+        <dependency>
+          <groupId>org.jboss.arquillian.container</groupId>
+          <artifactId>arquillian-tomcat-managed-7</artifactId>
+          <version>1.0.0.CR4</version>
+          <scope>test</scope>
+        </dependency>
         <dependency>
           <groupId>org.jboss.resteasy</groupId>
           <artifactId>resteasy-jaxrs</artifactId>
@@ -90,4 +135,16 @@
       </dependencies>
     </profile>
   </profiles>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>1.0.3.Final</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>

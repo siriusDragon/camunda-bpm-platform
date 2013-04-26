@@ -1,16 +1,20 @@
-package org.camunda.bpm.cockpit.plugin.core.persistence;
+package org.camunda.bpm.cockpit.plugin.api.db;
 
 import org.camunda.bpm.engine.impl.db.ListQueryParameterObject;
 
-
-public class CockpitQueryParameter<T> extends ListQueryParameterObject {
+/**
+ * Typed query parameters for usage in cockpit plugins
+ *
+ * @author Nico Rehwaldt
+ * @param <T>
+ */
+public class QueryParameters<T> extends ListQueryParameterObject {
 
   protected boolean historyEnabled = true;
-  
-  public CockpitQueryParameter() {
-  }
-  
-  public CockpitQueryParameter(int firstResult, int maxResults) {
+
+  public QueryParameters() { }
+
+  public QueryParameters(int firstResult, int maxResults) {
     this.firstResult = firstResult;
     this.maxResults = maxResults;
   }
@@ -22,5 +26,4 @@ public class CockpitQueryParameter<T> extends ListQueryParameterObject {
   public void setHistoryEnabled(boolean historyEnabled) {
     this.historyEnabled = historyEnabled;
   }
-  
 }

@@ -19,6 +19,12 @@
 
     <dependency>
       <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-engine-rest</artifactId>
       <classifier>classes</classifier>
       <version>${project.version}</version>

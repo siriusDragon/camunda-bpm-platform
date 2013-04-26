@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cockpit.core">
+
+  <select id="selectProcessInstances" parameterType="org.camunda.bpm.cockpit.plugin.api.db.QueryParameters" resultMap="executionResultMap">
+    from ${prefix}ACT_HI_PROCINST RES
+    left join ${prefix}ACT_RE_PROCDEF P on RES.PROC_DEF_ID_ = P.ID_
+  </select>
+</mapper>

@@ -11,25 +11,16 @@
   </parent>
 
   <groupId>org.camunda.bpm.cockpit</groupId>
-  <artifactId>camunda-cockpit-plugin-sample</artifactId>
-  <packaging>war</packaging>
-  <name>camunda BPM - cockpit - plugin sample</name>
+  <artifactId>camunda-cockpit-plugin-core</artifactId>
+  <packaging>jar</packaging>
+  <name>camunda BPM - cockpit - plugin core</name>
 
   <dependencies>
-
-    <!-- servlet api -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
-      <scope>provided</scope>
-    </dependency>
-
     <dependency>
       <groupId>org.camunda.bpm.cockpit</groupId>
-      <artifactId>camunda-cockpit-plugin-registry</artifactId>
+      <artifactId>camunda-cockpit-plugin-api</artifactId>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
-
   </dependencies>
 </project>

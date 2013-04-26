@@ -1,19 +1,22 @@
-package org.camunda.bpm.cockpit.plugin.core.persistence;
+package org.camunda.bpm.cockpit.plugin.impl.db;
 
 import java.io.InputStream;
+import java.io.StringReader;
+import java.util.List;
 
+import org.apache.commons.io.input.ReaderInputStream;
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 
 /**
- * 
+ *
  * @author drobisch
  *
  */
-public class CockpitQuerySessionFactory extends StandaloneProcessEngineConfiguration {
+public class QuerySessionFactory extends StandaloneProcessEngineConfiguration {
 
-  private String resourceName;
+  private List<String> mappingFiles;
 
   protected void init() {
     throw new IllegalArgumentException(
@@ -25,9 +28,9 @@ public class CockpitQuerySessionFactory extends StandaloneProcessEngineConfigura
    * just using the database settings and initialize the database / MyBatis
    * stuff.
    */
-  public void initFromProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration, String resourceName) {
-    this.resourceName = resourceName;
-    
+  public void initFromProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration, List<String> mappings) {
+    this.mappingFiles = mappingFiles;
+
     setDatabaseType(processEngineConfiguration.getDatabaseType());
     setDataSource(processEngineConfiguration.getDataSource());
     setDatabaseTablePrefix(processEngineConfiguration.getDatabaseTablePrefix());
@@ -44,8 +47,30 @@ public class CockpitQuerySessionFactory extends StandaloneProcessEngineConfigura
 
   @Override
   protected InputStream getMyBatisXmlConfigurationSteam() {
-    return CockpitQuerySessionFactory.class.getClassLoader().getResourceAsStream(resourceName);
+    return new ReaderInputStream(new StringReader(buildMappings(mappingFiles)));
   }
 
+  protected String buildMappings(List<String> mappingFiles) {
+
+    StringBuilder builder = new StringBuilder();
+    for (String mappingFile: mappingFiles) {
+      builder.append(String.format("<mapper resource=\"%s\" />\n", mappingFile));
+    }
+
+    String mappingsFileTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+"\n" +
+"<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n" +
+"\n" +
+"<configuration>\n" +
+"	<settings>\n" +
+"		<setting name=\"lazyLoadingEnabled\" value=\"false\" />\n" +
+"	</settings>\n" +
+"	<mappers>\n" +
+"%s\n" +
+"	</mappers>\n" +
+"</configuration>";
+
+    return String.format(mappingsFileTemplate, builder.toString());
+  }
 }
 
