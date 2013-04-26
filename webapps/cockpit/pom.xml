@@ -17,6 +17,7 @@
   <modules>
     <module>cockpit</module>
     <module>cockpit-plugin/api</module>
+	<module>cockpit-plugin/sample</module>
   </modules>
 
   <dependencyManagement>
