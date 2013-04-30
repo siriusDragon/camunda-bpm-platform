@@ -29,7 +29,7 @@ public class QuerySessionFactory extends StandaloneProcessEngineConfiguration {
    * stuff.
    */
   public void initFromProcessEngineConfiguration(ProcessEngineConfigurationImpl processEngineConfiguration, List<String> mappings) {
-    this.mappingFiles = mappingFiles;
+    this.mappingFiles = mappings;
 
     setDatabaseType(processEngineConfiguration.getDatabaseType());
     setDataSource(processEngineConfiguration.getDataSource());
@@ -58,17 +58,17 @@ public class QuerySessionFactory extends StandaloneProcessEngineConfiguration {
     }
 
     String mappingsFileTemplate = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-"\n" +
-"<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n" +
-"\n" +
-"<configuration>\n" +
-"	<settings>\n" +
-"		<setting name=\"lazyLoadingEnabled\" value=\"false\" />\n" +
-"	</settings>\n" +
-"	<mappers>\n" +
-"%s\n" +
-"	</mappers>\n" +
-"</configuration>";
+        "\n" +
+        "<!DOCTYPE configuration PUBLIC \"-//mybatis.org//DTD Config 3.0//EN\" \"http://mybatis.org/dtd/mybatis-3-config.dtd\">\n" +
+        "\n" +
+        "<configuration>\n" +
+        "	<settings>\n" +
+        "		<setting name=\"lazyLoadingEnabled\" value=\"false\" />\n" +
+        "	</settings>\n" +
+        "	<mappers>\n" +
+        "%s\n" +
+        "	</mappers>\n" +
+        "</configuration>";
 
     return String.format(mappingsFileTemplate, builder.toString());
   }

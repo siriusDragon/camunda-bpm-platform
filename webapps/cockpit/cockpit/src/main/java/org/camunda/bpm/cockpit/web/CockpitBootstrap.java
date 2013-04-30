@@ -2,6 +2,7 @@ package org.camunda.bpm.cockpit.web;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -13,8 +14,8 @@ import org.camunda.bpm.cockpit.plugin.impl.db.CommandExecutor;
 import org.camunda.bpm.cockpit.plugin.impl.db.QueryService;
 import org.camunda.bpm.cockpit.spi.CockpitPlugin;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.impl.ProcessEngineImpl;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 /**
  *
@@ -47,7 +48,7 @@ public class CockpitBootstrap implements ServletContextListener {
 
     QueryService service = new QueryService(commandExecutor);
 
-    List<ProcessInstance> instances = service.executeQuery("cockpit.core.selectProcessInstances", new QueryParameters<ProcessInstance>());
+    List<HistoricProcessInstance> instances = service.executeQuery("cockpit.core.selectHistoricProcessInstance", new QueryParameters<HistoricProcessInstance>());
 
     System.out.println(instances);
   }

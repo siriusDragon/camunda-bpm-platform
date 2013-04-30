@@ -4,8 +4,24 @@
 
 <mapper namespace="cockpit.core">
 
-  <select id="selectProcessInstances" parameterType="org.camunda.bpm.cockpit.plugin.api.db.QueryParameters" resultMap="executionResultMap">
-    from ${prefix}ACT_HI_PROCINST RES
-    left join ${prefix}ACT_RE_PROCDEF P on RES.PROC_DEF_ID_ = P.ID_
+  <resultMap id="historicProcessInstanceResultMap" type="org.camunda.bpm.engine.impl.persistence.entity.HistoricProcessInstanceEntity">
+    <id property="id" column="ID_" jdbcType="VARCHAR" />
+    <result property="businessKey" column="BUSINESS_KEY_" jdbcType="VARCHAR"/>
+    <result property="processDefinitionId" column="PROC_DEF_ID_" jdbcType="VARCHAR" />
+    <result property="startTime" column="START_TIME_" jdbcType="TIMESTAMP" />
+    <result property="endTime" column="END_TIME_" jdbcType="TIMESTAMP" />
+    <result property="durationInMillis" column="DURATION_" jdbcType="BIGINT" />
+    <result property="startUserId" column="START_USER_ID_" jdbcType="VARCHAR" />
+    <result property="startActivityId" column="START_ACT_ID_" jdbcType="VARCHAR" />
+    <result property="endActivityId" column="END_ACT_ID_" jdbcType="VARCHAR" />
+    <result property="superProcessInstanceId" column="SUPER_PROCESS_INSTANCE_ID_" jdbcType="VARCHAR" />
+    <result property="deleteReason" column="DELETE_REASON_" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- HISTORIC PROCESS INSTANCE SELECT -->
+  
+  <select id="selectHistoricProcessInstance" resultMap="historicProcessInstanceResultMap">
+    select * from ${prefix}ACT_HI_PROCINST
   </select>
+  
 </mapper>

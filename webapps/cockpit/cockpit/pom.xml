@@ -53,18 +53,6 @@
       <version>${project.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.jboss.resteasy</groupId>
-      <artifactId>resteasy-jaxrs</artifactId>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>httpclient</artifactId>
-          <groupId>org.apache.httpcomponents</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
     <!-- tests -->
     <dependency>
       <groupId>junit</groupId>
@@ -91,6 +79,12 @@
       <artifactId>arquillian-junit-container</artifactId>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    
   </dependencies>
 
   <build>
@@ -108,11 +102,6 @@
   <profiles>
     <profile>
       <id>tomcat</id>
-
-      <properties>
-        <tomcat6.runtime.location>E:/Camunda/repository/camunda-bpm-platform/distro/tomcat/distro/target/camunda-bpm-tomcat-7.0.0-SNAPSHOT/server/apache-tomcat-7.0.33</tomcat6.runtime.location>
-        <tomcat6.connector.http.port>8080</tomcat6.connector.http.port>
-      </properties>
 
       <dependencies>
         <dependency>
