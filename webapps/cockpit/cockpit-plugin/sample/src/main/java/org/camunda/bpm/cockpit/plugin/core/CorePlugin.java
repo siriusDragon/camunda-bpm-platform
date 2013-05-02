@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.camunda.bpm.cockpit.spi.CockpitPlugin;
+import org.camunda.bpm.cockpit.plugin.spi.impl.AbstractCockpitPlugin;
 
 /**
  *
  * @author Nico Rehwaldt
  */
-public class CorePlugin implements CockpitPlugin {
+public class CorePlugin extends AbstractCockpitPlugin {
 
   private static final String[] MAPPING_FILES = {
 //    "org/camunda/bpm/cockpit/plugin/sample/db/mappings/auditMapping.xml",
@@ -20,12 +20,7 @@ public class CorePlugin implements CockpitPlugin {
 
     "org/camunda/bpm/cockpit/plugin/sample/db/mappings/simple.xml"
   };
-
-  @Override
-  public Set<Class<?>> getResourceClasses() {
-    return Collections.EMPTY_SET;
-  }
-
+  
   @Override
   public String getId() {
     return "core";
