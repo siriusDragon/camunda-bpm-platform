@@ -10,13 +10,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.camunda.bpm.cockpit;
+package org.camunda.bpm.cockpit.plugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.camunda.bpm.BpmPlatform;
-import org.camunda.bpm.cockpit.plugin.PluginRegistry;
 import org.camunda.bpm.cockpit.plugin.api.CockpitRuntimeDelegate;
 import org.camunda.bpm.cockpit.plugin.api.db.CommandExecutor;
 import org.camunda.bpm.cockpit.plugin.api.db.QueryService;

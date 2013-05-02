@@ -16,7 +16,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.camunda.bpm.cockpit.DefaultRuntimeDelegate;
+import org.camunda.bpm.cockpit.plugin.DefaultRuntimeDelegate;
 import org.camunda.bpm.cockpit.plugin.api.Cockpit;
 
 /**
