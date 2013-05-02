@@ -37,7 +37,7 @@ public class SampleProcessApplication extends ServletProcessApplication {
     variables.put("amount", "30$");
     variables.put("invoiceNumber", "GPFE-23232323");
     
-    processEngine.getRuntimeService().startProcessInstanceByKey("invoice", variables);
+    processEngine.getRuntimeService().startProcessInstanceByKey("fox-invoice_en", variables);
   }
 
 }

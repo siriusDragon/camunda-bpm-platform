@@ -54,7 +54,7 @@ public class PluginDeploymentTest {
         .addAsLibraries(resolver.artifact("commons-io:commons-io").resolveAsFiles())
         .addPackages(true, "org.camunda.bpm.cockpit")
         .addClass(SampleProcessApplication.class)
-        .addAsResource("processes/invoice.bpmn")
+        .addAsResource("processes/fox-invoice_en.bpmn")
         .addAsResource("META-INF/processes.xml", "META-INF/processes.xml");
   }
 
