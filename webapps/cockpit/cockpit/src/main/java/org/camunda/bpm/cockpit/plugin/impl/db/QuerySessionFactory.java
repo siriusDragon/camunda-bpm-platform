@@ -1,3 +1,15 @@
+/* Licensed under the Apache License, Version 2.0 import java.io.InputStream;
+import java.io.StringReader;
+import java.util.List;
+
+import org.apache.commons.io.input.ReaderInputStream;
+import org.camunda.bpm.engine.ProcessEngineConfiguration;
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
+RANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.camunda.bpm.cockpit.plugin.impl.db;
 
 import java.io.InputStream;

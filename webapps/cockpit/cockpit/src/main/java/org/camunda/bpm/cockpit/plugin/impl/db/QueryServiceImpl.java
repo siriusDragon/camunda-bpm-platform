@@ -1,22 +1,36 @@
+/* Licensed under the Apache License, Version 2.0 import java.util.List;
+
+import org.camunda.bpm.cockpit.plugin.api.db.CommandExecutor;
+import org.camunda.bpm.cockpit.plugin.api.db.QueryParameters;
+import org.camunda.bpm.cockpit.plugin.api.db.QueryService;
+import org.camunda.bpm.engine.impl.db.ListQueryParameterObject;
+import org.camunda.bpm.engine.impl.interceptor.Command;
+import org.camunda.bpm.engine.impl.interceptor.CommandContext;
+ or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.camunda.bpm.cockpit.plugin.impl.db;
 
-import org.camunda.bpm.cockpit.plugin.api.db.QueryParameters;
 import java.util.List;
 
+import org.camunda.bpm.cockpit.plugin.api.db.CommandExecutor;
+import org.camunda.bpm.cockpit.plugin.api.db.QueryParameters;
+import org.camunda.bpm.cockpit.plugin.api.db.QueryService;
 import org.camunda.bpm.engine.impl.db.ListQueryParameterObject;
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.interceptor.CommandContext;
 
-public class QueryService {
+public class QueryServiceImpl implements QueryService {
 
   private CommandExecutor commandExecutor;
 
-  public QueryService(CommandExecutor commandExecutor) {
+  public QueryServiceImpl(CommandExecutor commandExecutor) {
     this.commandExecutor = commandExecutor;
   }
 
   public <T> List<T> executeQuery(final String statement, final QueryParameters<T> parameter) {
-    List<T> queryResult = commandExecutor.executeQueryCommand(new Command<List<T>>() {
+    List<T> queryResult = commandExecutor.executeCommand(new Command<List<T>>() {
 
       @SuppressWarnings("unchecked")
       public List<T> execute(CommandContext commandContext) {
@@ -28,7 +42,7 @@ public class QueryService {
   }
 
   public <T> T executeQuery(final String statement, final Object parameter, final Class<T> clazz) {
-      T queryResult = commandExecutor.executeQueryCommand(new Command<T>() {
+      T queryResult = commandExecutor.executeCommand(new Command<T>() {
 
       @SuppressWarnings("unchecked")
       public T execute(CommandContext commandContext) {
@@ -40,7 +54,7 @@ public class QueryService {
   }
 
   public Long executeQueryRowCount(final String statement, final ListQueryParameterObject parameter) {
-    Long queryResult = commandExecutor.executeQueryCommand(new Command<Long>() {
+    Long queryResult = commandExecutor.executeCommand(new Command<Long>() {
 
       public Long execute(CommandContext commandContext) {
         return (Long) commandContext.getDbSqlSession().selectOne(statement, parameter);
