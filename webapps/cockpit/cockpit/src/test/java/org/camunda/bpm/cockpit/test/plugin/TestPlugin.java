@@ -15,7 +15,7 @@ package org.camunda.bpm.cockpit.test.plugin;
 
 import java.util.Arrays;
 
-import org.camunda.bpm.cockpit.test.plugin.resources.TestPluginResourceApi;
+import org.camunda.bpm.cockpit.test.plugin.resources.TestPluginRootResource;
 import org.camunda.bpm.cockpit.test.plugin.resources.TestResource;
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +29,8 @@ import org.camunda.bpm.cockpit.plugin.spi.impl.AbstractCockpitPlugin;
  */
 public class TestPlugin extends AbstractCockpitPlugin {
 
+  public static final String ID = "test";
+
   private static final String[] MAPPING_FILES = {
     "org/camunda/bpm/cockpit/test/plugin/db/mappings/simple.xml"
   };
@@ -40,7 +42,7 @@ public class TestPlugin extends AbstractCockpitPlugin {
 
   @Override
   public String getId() {
-    return "test";
+    return ID;
   }
 
   @Override
@@ -48,7 +50,7 @@ public class TestPlugin extends AbstractCockpitPlugin {
     final HashSet<Class<?>> classes = new HashSet<Class<?>>();
 
     classes.add(TestResource.class);
-    classes.add(TestPluginResourceApi.class);
+    classes.add(TestPluginRootResource.class);
 
     return classes;
   }

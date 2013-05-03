@@ -12,11 +12,13 @@
  */
 package org.camunda.bpm.cockpit.core.plugin;
 
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.*;
+
+import static org.fest.assertions.Assertions.assertThat;
+
 import org.camunda.bpm.cockpit.plugin.api.Cockpit;
 import org.camunda.bpm.cockpit.plugin.api.db.QueryParameters;
 import org.camunda.bpm.cockpit.plugin.api.db.QueryService;
-import org.camunda.bpm.cockpit.test.pa.TestProcessApplication;
-import static org.camunda.bpm.cockpit.test.util.CockpitResources.*;
 
 import java.util.List;
 
@@ -28,9 +30,7 @@ import org.camunda.bpm.engine.runtime.Execution;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -44,12 +44,11 @@ public class DeploymentTest {
   @Deployment
   public static Archive<?> createDeployment() {
 
-    WebArchive archive = ShrinkWrap.create(WebArchive.class)
-                      .addAsLibraries(pluginApi())
-                      .addAsLibraries(mavenDependency("org.jboss.resteasy:resteasy-jaxrs"))
-                      .addPackages(true, "org.camunda.bpm.cockpit.core")
-                      .addAsLibraries(testProcessArchiveJar())
-                      .addAsLibraries(testPluginJar());
+    WebArchive archive = cockpitWar()
+          .addAsLibraries(festAssertions())
+          .addAsLibraries(resteasyJaxRs())
+          .addAsLibraries(testPluginJar())
+          .addAsLibraries(testProcessArchiveJar());
 
     return archive;
   }
@@ -57,9 +56,9 @@ public class DeploymentTest {
   @Test
   public void shouldContainCorePlugin () {
     List<CockpitPlugin> plugins = Registry.getCockpitPlugins();
-    Assert.assertEquals(1, plugins.size());
+    assertThat(plugins).hasSize(1);
 
-    Assert.assertTrue(plugins.get(0) instanceof TestPlugin);
+    assertThat(plugins.get(0)).isInstanceOf(TestPlugin.class);
   }
 
   @Test
@@ -70,6 +69,6 @@ public class DeploymentTest {
 
     List<Execution> result = queryService.executeQuery("cockpit.core.selectExecution", new QueryParameters<Execution>());
 
-    Assert.assertEquals(1, result.size());
+    assertThat(result).hasSize(1);
   }
 }

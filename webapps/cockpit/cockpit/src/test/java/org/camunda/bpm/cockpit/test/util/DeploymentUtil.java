@@ -4,12 +4,15 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import org.camunda.bpm.cockpit.core.web.CockpitApplication;
+import org.camunda.bpm.cockpit.core.web.CockpitBootstrap;
 import org.camunda.bpm.cockpit.plugin.spi.CockpitPlugin;
 import org.camunda.bpm.cockpit.test.plugin.TestPlugin;
 import org.camunda.bpm.cockpit.test.pa.TestProcessApplication;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 
@@ -17,7 +20,7 @@ import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
  *
  * @author nico.rehwaldt
  */
-public class CockpitResources {
+public class DeploymentUtil {
 
   /**
    * Resolver to resolve external maven dependencies
@@ -60,14 +63,33 @@ public class CockpitResources {
     return mavenDependency("org.easytesting:fest-assert");
   }
 
+  public static File[] resteasyJaxRs() {
+    return mavenDependency("org.jboss.resteasy:resteasy-jaxrs");
+  }
+
   public static File[] mavenDependency(String name) {
-    System.out.println("[resolve maven dependency] " + name);
     return resolver().artifact(name).resolveAsFiles();
   }
 
   public static File[] mavenDependencies(String... names) {
-    System.out.println("[resolve maven dependencies] " + Arrays.asList(names));
     return resolver().artifacts(names).resolveAsFiles();
+  }
+
+  public static JavaArchive cockpitCore() {
+    JavaArchive archive = ShrinkWrap.create(JavaArchive.class, "cockpit-core")
+        .addClass(CockpitBootstrap.class)
+        .addClass(CockpitApplication.class);
+
+    return archive;
+  }
+
+  public static WebArchive cockpitWar() {
+    return ShrinkWrap
+        .create(WebArchive.class, "test")
+          .addAsLibraries(pluginApi())
+          .addAsLibraries(cockpitCore())
+          .addPackages(true, "org.camunda.bpm.cockpit.core")
+          .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
   }
 
   public static JavaArchive testProcessArchive() {

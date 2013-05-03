@@ -13,37 +13,44 @@
 package org.camunda.bpm.cockpit.core.web.resources.plugin;
 
 import java.io.InputStream;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 
+import org.camunda.bpm.cockpit.core.plugin.Registry;
 import org.camunda.bpm.cockpit.plugin.spi.CockpitPlugin;
 
 /**
  *
  * @author nico.rehwaldt
  */
-public class PluginAssetsResource {
+@Path("plugin")
+public class StaticFilesService {
 
-  private final CockpitPlugin plugin;
-
-  public PluginAssetsResource(CockpitPlugin plugin) {
-    this.plugin = plugin;
+  @GET
+  public List<CockpitPlugin> getPlugins() {
+    return Registry.getCockpitPlugins();
   }
 
   @GET
-  @Path("{asset:.*}")
-  public InputStream getAsset(@PathParam("asset") String asset) {
+  @Path("{pluginName}/static/{file:.*}")
+  public InputStream getAsset(@PathParam("pluginName") String pluginName, @PathParam("file") String file) {
 
-    String assetDirectory = plugin.getAssetDirectory();
-    if (assetDirectory != null) {
-      String assetName = String.format("%s/%s", assetDirectory, asset);
+    CockpitPlugin plugin = Registry.getCockpitPlugin(pluginName);
 
-      InputStream assetStream = getAssetAsStream(assetName);
-      if (assetStream != null) {
-        return assetStream;
+    if (plugin != null) {
+      String assetDirectory = plugin.getAssetDirectory();
+      if (assetDirectory != null) {
+        String assetName = String.format("%s/%s", assetDirectory, file);
+
+        InputStream assetStream = getAssetAsStream(plugin, assetName);
+        if (assetStream != null) {
+          return assetStream;
+        }
       }
     }
 
@@ -57,9 +64,8 @@ public class PluginAssetsResource {
    * @param resourceName
    * @return
    */
-  private InputStream getAssetAsStream(String resourceName) {
+  private InputStream getAssetAsStream(CockpitPlugin plugin, String resourceName) {
 
     return plugin.getClass().getResourceAsStream(resourceName);
-
   }
 }

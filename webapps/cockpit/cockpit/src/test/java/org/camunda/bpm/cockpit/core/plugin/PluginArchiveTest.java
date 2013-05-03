@@ -1,6 +1,6 @@
 package org.camunda.bpm.cockpit.core.plugin;
 
-import static org.camunda.bpm.cockpit.test.util.CockpitResources.testPlugin;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.testPlugin;
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.jboss.shrinkwrap.api.spec.JavaArchive;

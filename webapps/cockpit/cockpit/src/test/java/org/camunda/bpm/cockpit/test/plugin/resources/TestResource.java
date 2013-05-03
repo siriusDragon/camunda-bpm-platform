@@ -12,19 +12,29 @@
  */
 package org.camunda.bpm.cockpit.test.plugin.resources;
 
-import org.camunda.bpm.engine.rest.impl.AbstractRestProcessEngineAware;
+import java.util.List;
+import javax.ws.rs.GET;
+
+import org.camunda.bpm.cockpit.plugin.api.db.QueryParameters;
+import org.camunda.bpm.cockpit.plugin.api.resource.AbstractPluginResource;
+import org.camunda.bpm.engine.runtime.Execution;
 
 /**
- *
+ * A test resource
+ * 
  * @author nico.rehwaldt
  */
-public class TestResource extends AbstractRestProcessEngineAware {
+public class TestResource extends AbstractPluginResource {
 
   public TestResource(String engine) {
     super(engine);
   }
 
-  public TestResource() {
-    super();
+  @GET
+  public List<Execution> foo() {
+
+    List<Execution> result = getQueryService().executeQuery("cockpit.core.selectExecution", new QueryParameters<Execution>());
+
+    return result;
   }
 }

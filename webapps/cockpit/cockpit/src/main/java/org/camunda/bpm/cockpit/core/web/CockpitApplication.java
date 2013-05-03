@@ -19,7 +19,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 import org.camunda.bpm.cockpit.core.plugin.Registry;
-import org.camunda.bpm.cockpit.core.web.resources.plugin.PluginResources;
+import org.camunda.bpm.cockpit.core.web.resources.plugin.StaticFilesService;
 import org.camunda.bpm.cockpit.plugin.spi.CockpitPlugin;
 import org.camunda.bpm.engine.rest.exception.ExceptionHandler;
 import org.camunda.bpm.engine.rest.mapper.JacksonConfigurator;
@@ -35,13 +35,14 @@ public class CockpitApplication extends Application {
   public Set<Class<?>> getClasses() {
     Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    classes.add(PluginResources.class);
+    classes.add(StaticFilesService.class);
 
     classes.add(JacksonConfigurator.class);
     classes.add(JacksonJsonProvider.class);
     classes.add(ExceptionHandler.class);
 
     addPluginResourceClasses(classes);
+
     return classes;
   }
 

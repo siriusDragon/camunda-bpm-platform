@@ -10,23 +10,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.camunda.bpm.cockpit.test.plugin.resources;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import org.camunda.bpm.cockpit.plugin.api.resource.PluginResourceApi;
+import org.camunda.bpm.cockpit.plugin.api.resource.AbstractPluginRootResource;
+import org.camunda.bpm.cockpit.test.plugin.TestPlugin;
 
 /**
+ * A test root resource
  *
  * @author nico.rehwaldt
  */
-@Path("test-plugin")
-public class TestPluginResourceApi extends PluginResourceApi {
+@Path("plugin/" + TestPlugin.ID)
+public class TestPluginRootResource extends AbstractPluginRootResource {
 
-  @Path("{engine}/my-resource")
-  public TestResource getMyResource(@PathParam("engine") String engine) {
+  @Path("{engine}/test")
+  public TestResource getTestResource(@PathParam("engine") String engine) {
     return subResource(new TestResource(engine), engine);
   }
 }

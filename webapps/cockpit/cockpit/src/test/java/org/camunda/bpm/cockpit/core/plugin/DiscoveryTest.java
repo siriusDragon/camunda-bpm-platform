@@ -12,10 +12,13 @@
  */
 package org.camunda.bpm.cockpit.core.plugin;
 
-import static org.camunda.bpm.cockpit.test.util.CockpitResources.festAssertions;
-import static org.camunda.bpm.cockpit.test.util.CockpitResources.resteasy;
-import static org.camunda.bpm.cockpit.test.util.CockpitResources.pluginApi;
-import static org.camunda.bpm.cockpit.test.util.CockpitResources.testPluginJar;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.cockpitWar;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.festAssertions;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.resteasy;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.pluginApi;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.resteasyJaxRs;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.testPluginJar;
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.testProcessArchiveJar;
 
 import org.camunda.bpm.cockpit.test.plugin.TestPlugin;
 import java.util.List;
@@ -44,13 +47,10 @@ public class DiscoveryTest {
 
   @Deployment
   public static Archive<?> createDeployment() {
-    WebArchive archive = ShrinkWrap.create(WebArchive.class)
-                      .addAsLibraries(festAssertions())
-                      .addAsLibraries(pluginApi())
-                      .addAsLibraries(resteasy())
-                      .addAsLibraries(testPluginJar())
-                      .addAsServiceProvider(CockpitPlugin.class, TestPlugin.class)
-                      .addPackages(true, "org.camunda.bpm.cockpit.core");
+    WebArchive archive = cockpitWar()
+          .addAsLibraries(festAssertions())
+          .addAsLibraries(resteasyJaxRs())
+          .addAsLibraries(testPluginJar());
 
     return archive;
   }
