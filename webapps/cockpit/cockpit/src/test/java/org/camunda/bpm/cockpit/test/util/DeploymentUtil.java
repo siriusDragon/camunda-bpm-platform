@@ -7,8 +7,8 @@ import java.util.List;
 import org.camunda.bpm.cockpit.core.web.CockpitApplication;
 import org.camunda.bpm.cockpit.core.web.CockpitBootstrap;
 import org.camunda.bpm.cockpit.plugin.spi.CockpitPlugin;
-import org.camunda.bpm.cockpit.test.plugin.TestPlugin;
 import org.camunda.bpm.cockpit.test.pa.TestProcessApplication;
+import org.camunda.bpm.cockpit.test.plugin.TestPlugin;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
@@ -102,7 +102,7 @@ public class DeploymentUtil {
   }
 
   public static File[] testProcessArchiveJar() {
-    testPlugin().as(ZipExporter.class)
+    testProcessArchive().as(ZipExporter.class)
         .exportTo(new File("target/test-process-archive.jar"), true);
 
     return new File[] { new File("target/test-process-archive.jar") };

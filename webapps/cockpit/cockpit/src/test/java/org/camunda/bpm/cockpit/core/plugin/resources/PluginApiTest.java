@@ -4,12 +4,13 @@ import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.cockpitWar;
 import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.festAssertions;
 import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.resteasyJaxRs;
 import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.testPluginJar;
-
+import static org.camunda.bpm.cockpit.test.util.DeploymentUtil.testProcessArchiveJar;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.net.URL;
 
 import javax.ws.rs.core.MediaType;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -39,6 +40,7 @@ public class PluginApiTest {
     WebArchive archive = cockpitWar()
           .addAsLibraries(festAssertions())
           .addAsLibraries(resteasyJaxRs())
+          .addAsLibraries(testProcessArchiveJar())
           .addAsLibraries(testPluginJar());
 
     return archive;
