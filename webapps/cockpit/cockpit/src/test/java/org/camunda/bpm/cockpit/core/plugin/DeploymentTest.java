@@ -50,6 +50,10 @@ public class DeploymentTest {
           .addAsLibraries(testPluginJar())
           .addAsLibraries(testProcessArchiveJar());
 
+    System.out.println(archive.toString(true));
+    System.out.println(testPlugin().toString(true));
+    System.out.println(testProcessArchive().toString(true));
+
     return archive;
   }
 

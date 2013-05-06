@@ -37,6 +37,8 @@ public class TestProcessApplication extends ServletProcessApplication {
     variables.put("amount", "30$");
     variables.put("invoiceNumber", "GPFE-23232323");
 
+    System.out.println(processEngine.getRuntimeService().createExecutionQuery().count());
+
     System.out.println("Start instance of fox-invoice_en");
     processEngine.getRuntimeService().startProcessInstanceByKey("fox-invoice_en", variables);
   }

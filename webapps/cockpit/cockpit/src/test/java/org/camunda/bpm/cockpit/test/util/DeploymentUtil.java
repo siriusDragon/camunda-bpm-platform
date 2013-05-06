@@ -76,24 +76,24 @@ public class DeploymentUtil {
   }
 
   public static JavaArchive cockpitCore() {
-    JavaArchive archive = ShrinkWrap.create(JavaArchive.class, "cockpit-core")
-        .addClass(CockpitBootstrap.class)
-        .addClass(CockpitApplication.class);
+    JavaArchive archive = ShrinkWrap.create(JavaArchive.class, "cockpit-core.jar")
+        .addPackages(true, "org.camunda.bpm.cockpit.core.plugin")
+        .addPackages(true, "org.camunda.bpm.cockpit.core.web");
 
     return archive;
   }
 
   public static WebArchive cockpitWar() {
     return ShrinkWrap
-        .create(WebArchive.class, "test")
+        .create(WebArchive.class, "test.war")
           .addAsLibraries(pluginApi())
-          .addAsLibraries(cockpitCore())
-          .addPackages(true, "org.camunda.bpm.cockpit.core")
+          .addPackages(true, "org.camunda.bpm.cockpit.core.plugin")
+          .addPackages(true, "org.camunda.bpm.cockpit.core.web")
           .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
   }
 
   public static JavaArchive testProcessArchive() {
-    JavaArchive archive = ShrinkWrap.create(JavaArchive.class, "sample-process-application")
+    JavaArchive archive = ShrinkWrap.create(JavaArchive.class, "sample-process-application.jar")
         .addClass(TestProcessApplication.class);
 
     addFiles(archive, "", new File("src/test/resources/process-archive"));
