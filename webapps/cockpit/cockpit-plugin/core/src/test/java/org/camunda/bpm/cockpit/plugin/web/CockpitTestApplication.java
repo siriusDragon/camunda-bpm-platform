@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.camunda.bpm.cockpit.core.web;
+package org.camunda.bpm.cockpit.plugin.web;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +28,7 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
  *
  * @author nico.rehwaldt
  */
-public class CockpitApplication extends Application {
+public class CockpitTestApplication extends Application {
 
   @Override
   public Set<Class<?>> getClasses() {

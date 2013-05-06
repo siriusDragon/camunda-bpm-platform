@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.camunda.bpm.cockpit.core.web;
+package org.camunda.bpm.cockpit.plugin.web;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -24,7 +24,7 @@ import org.camunda.bpm.cockpit.plugin.core.Cockpit;
  * @author nico.rehwaldt
  */
 @WebListener
-public class CockpitBootstrap implements ServletContextListener {
+public class CockpitTestBootstrap implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {

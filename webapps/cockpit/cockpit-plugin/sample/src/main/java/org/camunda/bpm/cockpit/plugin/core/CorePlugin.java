@@ -1,35 +1,32 @@
 package org.camunda.bpm.cockpit.plugin.core;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.camunda.bpm.cockpit.plugin.spi.impl.AbstractCockpitPlugin;
+import org.camunda.bpm.cockpit.plugin.core.spi.impl.AbstractCockpitPlugin;
 
 /**
  *
- * @author Nico Rehwaldt
+ * @author nico.rehwaldt
  */
 public class CorePlugin extends AbstractCockpitPlugin {
 
   private static final String[] MAPPING_FILES = {
-//    "org/camunda/bpm/cockpit/plugin/sample/db/mappings/auditMapping.xml",
-//    "org/camunda/bpm/cockpit/plugin/sample/db/mappings/processInstanceMapping.xml",
-//    "org/camunda/bpm/cockpit/plugin/sample/db/mappings/variableMapping.xml",
+//    "org/camunda/bpm/cockpit/plugin/sample/queries/auditMapping.xml",
+//    "org/camunda/bpm/cockpit/plugin/sample/queries/processInstanceMapping.xml",
+//    "org/camunda/bpm/cockpit/plugin/sample/queries/variableMapping.xml",
 
-    "org/camunda/bpm/cockpit/plugin/sample/db/mappings/simple.xml"
+    "org/camunda/bpm/cockpit/plugin/sample/queries/simple.xml"
   };
-  
+
   @Override
   public String getId() {
-    return "core";
+    return "sample";
   }
 
   @Override
   public List<String> getMappingFiles() {
     return Arrays.asList(MAPPING_FILES);
   }
-
-
 }
