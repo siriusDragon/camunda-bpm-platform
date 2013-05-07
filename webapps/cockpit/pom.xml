@@ -17,7 +17,7 @@
   <modules>
     <module>cockpit</module>
     <module>cockpit-plugin/core</module>
-    <module>cockpit-plugin/sample</module>
+    <module>cockpit-plugin/base</module>
   </modules>
 
   <dependencyManagement>
@@ -25,6 +25,11 @@
       <dependency>
         <groupId>org.camunda.bpm.cockpit</groupId>
         <artifactId>camunda-cockpit-plugin-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.cockpit</groupId>
+        <artifactId>camunda-cockpit-plugin-base</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

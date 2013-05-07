@@ -3,12 +3,14 @@
 define(["angular"], function(angular) {
   
   var module = angular.module("cockpit.pages");
-  
-  var Controller = function ($scope, ProcessDefinitionResource) {
+
+  var Controller = function ($scope, ProcessDefinitionResource, Plugins, FOO) {
     
     $scope.orderByPredicate = 'definition.name';
     $scope.orderByReverse = false;
     
+    $scope.dashboardPlugin = Plugins.get({ component: 'cockpit.dashboard'})[0];
+
     ProcessDefinitionResource.queryStatistics(function(data){
       $scope.statistics = getStatisticsResult(data);
     });
@@ -54,7 +56,7 @@ define(["angular"], function(angular) {
     
   };
   
-  Controller.$inject = ["$scope", "ProcessDefinitionResource"];
+  Controller.$inject = ["$scope", "ProcessDefinitionResource", "Plugins"];
   
   var RouteConfig = function($routeProvider) {
     $routeProvider.when('/dashboard', {

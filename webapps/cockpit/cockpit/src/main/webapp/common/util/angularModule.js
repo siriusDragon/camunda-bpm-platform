@@ -3,7 +3,7 @@ define([ "angular", "angularReady" ], function(angular, angularReady) {
   var each = angular.forEach;
 
   var isModule = function(module) {
-    return module.indexOf(".") != -1;
+    return module.indexOf(".") != -1 || module.indexOf("-") != -1;
   };
 
   var asFileName = function(module) {
@@ -43,7 +43,7 @@ define([ "angular", "angularReady" ], function(angular, angularReady) {
       }
 
       var internal = file && INTERNAL.test(file);
-      
+
       if (!internal && file) {
         files.push(file);
       }

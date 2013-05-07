@@ -11,15 +11,14 @@
   </parent>
 
   <groupId>org.camunda.bpm.cockpit</groupId>
-  <artifactId>camunda-cockpit-plugin-sample</artifactId>
+  <artifactId>camunda-cockpit-plugin-base</artifactId>
   <packaging>jar</packaging>
-  <name>camunda BPM - cockpit - plugin sample</name>
+  <name>camunda BPM - cockpit - plugin base</name>
 
   <dependencies>
     <dependency>
       <groupId>org.camunda.bpm.cockpit</groupId>
       <artifactId>camunda-cockpit-plugin-core</artifactId>
-      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
 
@@ -47,6 +46,13 @@
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

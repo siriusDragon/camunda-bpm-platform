@@ -19,7 +19,11 @@
     <dependency>
       <groupId>org.camunda.bpm.cockpit</groupId>
       <artifactId>camunda-cockpit-plugin-core</artifactId>
-      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.cockpit</groupId>
+      <artifactId>camunda-cockpit-plugin-base</artifactId>
     </dependency>
 
     <!-- jee spec -->
@@ -95,6 +99,7 @@
   </dependencies>
 
   <build>
+    <finalName>cockpit</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -105,5 +110,17 @@
       </plugin>
     </plugins>
   </build>
-  
+
+  <profiles>
+    <profile>
+      <id>tomcat</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.jboss.resteasy</groupId>
+          <artifactId>resteasy-jaxrs</artifactId>
+          <scope>compile</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

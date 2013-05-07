@@ -4,6 +4,8 @@
 
 (function(document, require) {
 
+  var pluginPackages = PLUGIN_PACKAGES || [];
+
   require.config({
     paths: {
       domReady : "assets/js/lib/require/domReady",
@@ -31,7 +33,7 @@
       { name: "dojox", location : "assets/js/lib/dojo/dojox" },
       { name: "jquery.overscroll", location : "assets/js/lib" },
       { name: "bootstrap-slider", location : "assets/bootstrap-slider" }
-    ]
+    ].concat(pluginPackages)
   });
 
   require([ "jquery"], function($) {
@@ -40,6 +42,6 @@
         angular.bootstrap(document, ['cockpit']);
       });
     });
-  }); 
+  });
 
 })(document, require);
